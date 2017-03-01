@@ -1,0 +1,36 @@
+/* Let's go FETCH our data */
+
+var fetch = function (searchTerms) {
+  console.log("button clicked");
+  $.ajax({
+    method: "GET",
+    url: 'http://api.openweathermap.org/data/2.5/weather?q=' + searchTerms + '&APPID=b51ff059850fb59ef5b5085a6e089a74'+'&units=imperial',
+    dataType: "json",
+    success: function(data) {
+      console.log(data);
+      console.log(data.main.temp);
+      console.log(data.name);
+      weather(data);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log(textStatus);
+    }
+  });
+};
+
+/* Handlebars template */
+var source = $('#weather-template').html();
+var template = Handlebars.compile(source);
+
+/* Append the date to our handlebars template */
+var weather = function(data) {
+  var newHTML = template({ temp: Math.floor(data.main.temp), city: data.name });
+  $('.weather').append(newHTML);
+}
+
+/* When a user clicks the button, the value of the input field
+is saved in the searchTerms variable and sent to fetch() */
+$('button').on('click', function() {
+    var searchTerms = $('input').val();
+    fetch(searchTerms);
+})
