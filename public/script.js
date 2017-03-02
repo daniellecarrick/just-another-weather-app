@@ -8,9 +8,8 @@ var fetch = function (searchTerms) {
     dataType: "json",
     success: function(data) {
       console.log(data);
-      console.log(data.main.temp);
-      console.log(data.name);
       weather(data);
+      colors(data);
     },
     error: function(jqXHR, textStatus, errorThrown) {
       console.log(textStatus);
@@ -33,4 +32,15 @@ is saved in the searchTerms variable and sent to fetch() */
 $('button').on('click', function() {
     var searchTerms = $('input').val();
     fetch(searchTerms);
+    $('.weather').empty();
 })
+
+/* Background color is based on temperature */
+var colors = function(data) {
+  var temp = data.main.temp;
+  var colorScale = d3.scaleLinear().domain([0,100]).range([1,0]);
+  var bgColor = d3.interpolateRdYlBu(colorScale(temp));
+  d3.select('body').style('background-color', bgColor);
+}
+
+

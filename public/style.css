@@ -1,11 +1,40 @@
-html {
+body {
   background-color: gold;
 }
 
 .container-fluid {
-  background-color: gold;
+ /* background-color: gold;*/
 }
 
 #temp {
-  font-size: 20em;
+  font-size: 10em;
+}
+
+.degrees {
+  font-size: .2em;
+  top:-3em;
+}
+
+sup, sub {
+  vertical-align: baseline;
+  position: relative;
+  top: -0.4em;
+}
+sub {
+  top: 0.4em;
+}
+
+/* Styles for the input field */
+
+input {
+    border-style: none;
+    border-bottom: 1px solid white;
+    padding: 15px;
+    background: rgba(255,255,255,0);
+    margin: 0 0 10px 0;
+    font-size: 2em;
+}
+
+input:focus {
+  outline: none;
 }
